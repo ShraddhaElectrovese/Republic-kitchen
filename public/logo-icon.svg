@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="rkGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F59E0B" />
+      <stop offset="100%" stop-color="#EA580C" />
+    </linearGradient>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#bgGrad)" stroke="#334155" stroke-width="1.5"/>
+  <!-- Chef hat / Flame Crown -->
+  <path d="M20 38C17 38 15 35 16 32C17 29 19.5 28.5 21 29C20.5 26 22 21 26 19C30 17 33 19 33.5 21C35 18 39 17 42 20C45 23 44 27 43 28.5C45 28.5 48 30.5 47.5 34C47 37 44 38 42 38H20Z" fill="url(#rkGrad)" opacity="0.9"/>
+  <!-- Crown Base Band -->
+  <rect x="20" y="38" width="24" height="5" rx="2.5" fill="#F8FAFC"/>
+  <!-- Base Spoon/Fork cross accent -->
+  <circle cx="32" cy="48" r="2.5" fill="#F59E0B"/>
+  <circle cx="25" cy="48" r="1.5" fill="#94A3B8"/>
+  <circle cx="39" cy="48" r="1.5" fill="#94A3B8"/>
+</svg>

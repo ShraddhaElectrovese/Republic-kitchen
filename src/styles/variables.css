@@ -1,0 +1,26 @@
+:root {
+  --primary-orange: #ff4e27;
+  --primary-orange-hover: #ea3f18;
+  --primary-orange-light: #fff2ed;
+  --primary-orange-border: #ffd7c9;
+  
+  --brand-dark: #111827;
+  --brand-slate: #1f2937;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-muted: #9ca3af;
+  
+  --bg-page: #fbfaf8;
+  --bg-card: #ffffff;
+  --bg-warm: #faf7f2;
+  --bg-dark-card: #111827;
+  
+  --success-green: #10b981;
+  --success-green-bg: #ecfdf5;
+  --success-green-border: #a7f3d0;
+  
+  --card-border: #e5e7eb;
+  --card-radius: 14px;
+  --card-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+  --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
