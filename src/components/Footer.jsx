@@ -73,22 +73,12 @@ export const Footer = ({ onScrollToCalculator, onOpenLeadModal }) => {
 
           {/* Col 3: Cities Served */}
           <div>
-            <h4 className="footer-col-title">Operating Hubs</h4>
+            <h4 className="footer-col-title">Operating Hub</h4>
             <p className="footer-cities-desc">
-              Daily cold-chain delivery across:
+              Daily cold-chain delivery in:
             </p>
             <div className="footer-cities-tags">
-              {[
-                'Delhi NCR',
-                'Bengaluru',
-                'Mumbai',
-                'Hyderabad',
-                'Pune',
-                'Chandigarh',
-                'Jaipur',
-                'Ahmedabad',
-                'Kolkata',
-              ].map((c) => (
+              {['Chandigarh'].map((c) => (
                 <span key={c} className="footer-city-tag">
                   {c}
                 </span>
