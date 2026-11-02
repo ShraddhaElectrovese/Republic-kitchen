@@ -20,10 +20,12 @@ export const App = () => {
             case '2-step-outlet': return 1;
             case '3-step-cuisines': return 2;
             case '4-step-menu': return 3;
-            case '5-step-footfall': return 4;
-            case '6-step-aov': return 5;
-            case '7-step-margin': return 6;
-            case '8-step-details': return 7;
+            case '5-step-economics':
+            case '5-step-footfall':
+            case '6-step-aov':
+            case '7-step-margin': return 4;
+            case '6-step-details':
+            case '8-step-details': return 5;
             default: return 1;
         }
     };
@@ -32,10 +34,8 @@ export const App = () => {
             case 1: return '2-step-outlet';
             case 2: return '3-step-cuisines';
             case 3: return '4-step-menu';
-            case 4: return '5-step-footfall';
-            case 5: return '6-step-aov';
-            case 6: return '7-step-margin';
-            case 7: return '8-step-details';
+            case 4: return '5-step-economics';
+            case 5: return '6-step-details';
             default: return '2-step-outlet';
         }
     };
@@ -63,6 +63,8 @@ export const App = () => {
         '2-step-outlet',
         '3-step-cuisines',
         '4-step-menu',
+        '5-step-economics',
+        '6-step-details',
         '5-step-footfall',
         '6-step-aov',
         '7-step-margin',
@@ -70,7 +72,11 @@ export const App = () => {
     ].includes(activePage);
     return (<div className="min-h-screen flex flex-col bg-[#faf8f5] text-slate-800 antialiased">
       {/* Top Navbar */}
-      <Navbar onStartCalculator={handleStartCalculator} onGoHome={handleGoHome}/>
+      <Navbar
+        onStartCalculator={handleStartCalculator}
+        onGoHome={handleGoHome}
+        showCta={activePage === '1-overview'}
+      />
 
       {/* Main View Container */}
       <main className="flex-1">

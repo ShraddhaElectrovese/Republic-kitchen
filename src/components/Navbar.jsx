@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight, Menu } from 'lucide-react';
 import '../styles/navbar.css';
-export const Navbar = ({ onStartCalculator, onGoHome, }) => {
+export const Navbar = ({ onStartCalculator, onGoHome, showCta = true }) => {
     return (<header className="navbar-container">
       {/* Main Top Header */}
       <div className="navbar-inner">
@@ -37,10 +37,12 @@ export const Navbar = ({ onStartCalculator, onGoHome, }) => {
         </nav>
 
         {/* Right CTA Button */}
-        <button type="button" className="navbar-cta-btn" onClick={onStartCalculator}>
-          <span>Calculate Your Savings</span>
-          <ArrowRight size={14}/>
-        </button>
+        {showCta && (
+          <button type="button" className="navbar-cta-btn" onClick={onStartCalculator}>
+            <span>Calculate Your Savings</span>
+            <ArrowRight size={14}/>
+          </button>
+        )}
 
         {/* Mobile menu icon */}
         <button type="button" className="mobile-menu-btn" onClick={onStartCalculator}>

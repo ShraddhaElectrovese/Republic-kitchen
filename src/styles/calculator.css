@@ -256,6 +256,90 @@
   margin-bottom: 36px;
 }
 
+.menu-checklist-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.menu-checklist-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  user-select: none;
+}
+
+.menu-select-all-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #1e293b;
+  font-size: 13.5px;
+  font-weight: 600;
+  transition: all 0.15s ease;
+}
+
+.menu-select-all-btn:hover .custom-checkbox-box {
+  border-color: #ff4e27;
+}
+
+.menu-select-all-btn.active .custom-checkbox-box {
+  background: #10b981;
+  border-color: #10b981;
+  color: #ffffff;
+}
+
+.menu-select-all-text {
+  letter-spacing: -0.01em;
+}
+
+.menu-checklist-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.menu-select-all-badge {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #64748b;
+  background: #ffffff;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+.menu-select-all-global-btn {
+  background: none;
+  border: none;
+  color: #ff4e27;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+  transition: opacity 0.15s ease;
+}
+
+.menu-select-all-global-btn:hover {
+  opacity: 0.8;
+}
+
 .menu-checklist {
   display: grid;
   grid-template-columns: 1fr;
@@ -331,6 +415,182 @@
   color: #64748b;
   text-align: center;
   font-weight: 500;
+}
+
+/* Step 4: Combined Business Metrics (Footfall, AOV, Margin) */
+.step-economics-container {
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.combined-metrics-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.combined-metric-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 18px 22px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.combined-metric-card:hover,
+.combined-metric-card:focus-within {
+  border-color: #cbd5e1;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+}
+
+.combined-metric-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.combined-metric-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.combined-metric-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.combined-metric-icon.icon-blue {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.combined-metric-icon.icon-orange {
+  background: #fff7ed;
+  color: #ea580c;
+}
+
+.combined-metric-icon.icon-green {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.combined-metric-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.25;
+  margin-bottom: 2px;
+}
+
+.combined-metric-desc {
+  font-size: 12px;
+  color: #64748b;
+  margin: 0;
+  line-height: 1.35;
+}
+
+.combined-metric-input-badge {
+  display: flex;
+  align-items: center;
+  background: #f8fafc;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 6px 12px;
+  gap: 6px;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.combined-metric-input-badge:focus-within {
+  background: #ffffff;
+  border-color: var(--primary-orange);
+  box-shadow: 0 0 0 3px rgba(255, 78, 39, 0.1);
+}
+
+.rupee-prefix {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.combined-metric-number {
+  font-size: 20px;
+  font-weight: 800;
+  color: #0f172a;
+  border: none;
+  outline: none;
+  width: 65px;
+  background: transparent;
+  text-align: right;
+}
+
+.combined-metric-unit {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+.live-revenue-preview-bar {
+  background: #faf7f2;
+  border: 1px solid #ebd9c8;
+  border-radius: 12px;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.live-revenue-label {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.live-revenue-calc-formula {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+.live-revenue-value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--primary-orange);
+}
+
+@media (max-width: 640px) {
+  .combined-metric-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .combined-metric-input-badge {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .combined-metric-number {
+    text-align: left;
+  }
+  .live-revenue-preview-bar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
 }
 
 /* Steps 4, 5, 6: Slider & Numeric Input */
@@ -504,9 +764,18 @@
     grid-template-columns: 1fr;
   }
   .cuisines-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
   .menu-items-layout {
     grid-template-columns: 1fr;
+  }
+  .menu-checklist-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .menu-checklist-toolbar-right {
+    width: 100%;
+    justify-content: space-between;
   }
 }

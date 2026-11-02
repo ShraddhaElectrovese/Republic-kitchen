@@ -80,12 +80,57 @@ export const ResultsPage = ({ data, onOpenLeadForm, onRecalculate, }) => {
             maximumFractionDigits: 0,
         }).format(val);
     };
+    const formatOutletType = (type) => {
+        switch (type) {
+            case 'takeaway': return 'Takeaway / Delivery Joint';
+            case 'cloud-kitchen': return 'Cloud / Dark Kitchen';
+            case 'dine-in': return 'Dine-In Restaurant';
+            case 'qsr': return 'QSR / Fast Food';
+            default: return type ? type.replace('-', ' ') : 'Commercial Kitchen';
+        }
+    };
     const handleDownload = () => {
         window.print();
     };
     return (<div className="results-page-wrapper">
       <div className="results-container">
-        {/* Header Row */}
+        {/* Print-Only Executive Header */}
+        <div className="print-header">
+          <div className="print-header-brand">
+            <img src="/logo.png" alt="Republic of Kitchens" className="print-logo" />
+            <div>
+              <div className="print-brand-title">Republic <span className="brand-title-accent">Of Kitchens</span></div>
+              <div className="print-brand-sub">Commercial Kitchen Solutions • Master Gravies &amp; Prep Automation</div>
+            </div>
+          </div>
+          <div className="print-header-meta">
+            <div className="print-doc-title">PROFIT &amp; MARGIN OPTIMIZATION SUMMARY</div>
+            <div className="print-doc-date">Generated: {new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</div>
+            <div className="print-confidential-pill">Confidential Client Assessment</div>
+          </div>
+        </div>
+
+        {/* Print-Only Client Details Strip */}
+        <div className="print-client-strip">
+          <div className="print-client-col">
+            <span className="print-client-label">Restaurant / Brand</span>
+            <span className="print-client-val">{data.brandName || 'My Kitchen'}</span>
+          </div>
+          <div className="print-client-col">
+            <span className="print-client-label">Contact Person</span>
+            <span className="print-client-val">{data.contactPerson || 'Restaurant Partner'}</span>
+          </div>
+          <div className="print-client-col">
+            <span className="print-client-label">Location / City</span>
+            <span className="print-client-val">{data.city || 'Pan India'}</span>
+          </div>
+          <div className="print-client-col">
+            <span className="print-client-label">Kitchen Format</span>
+            <span className="print-client-val capitalize">{formatOutletType(data.outletType)}</span>
+          </div>
+        </div>
+
+        {/* Header Row (Web view) */}
         <div className="results-header-row">
           <div className="results-title-group">
             <span className="party-popper-icon">🎉</span>
@@ -246,66 +291,68 @@ export const ResultsPage = ({ data, onOpenLeadForm, onRecalculate, }) => {
              - Adding new items with ready recipes and hire margins
              - Get semi prepared items sourced for better margins"
             ========================================================= */}
-        <h3 className="how-increase-title">
-          How to Increase Your Margin by Upto 20%
-        </h3>
-        <div className="how-increase-grid">
-          {/* Card 1: Ready Recipes & Higher Margins */}
-          <div className="how-card">
-            <div className="how-card-left">
-              <div className="how-card-header">
-                <div className="how-card-icon how-icon-orange">
-                  <ChefHat size={18}/>
+        <div className="how-increase-section">
+          <h3 className="how-increase-title">
+            How to Increase Your Margin by Upto 20%
+          </h3>
+          <div className="how-increase-grid">
+            {/* Card 1: Ready Recipes & Higher Margins */}
+            <div className="how-card">
+              <div className="how-card-left">
+                <div className="how-card-header">
+                  <div className="how-card-icon how-icon-orange">
+                    <ChefHat size={18}/>
+                  </div>
+                  <h4 className="how-card-title">Add New Items with Ready Recipes</h4>
                 </div>
-                <h4 className="how-card-title">Add New Items with Ready Recipes</h4>
+
+                <div className="how-points-list">
+                  <div className="how-point-item">
+                    <CheckCircle2 size={14} className="text-emerald-500 shrink-0"/>
+                    <span>Chef curated, high margin items</span>
+                  </div>
+                  <div className="how-point-item">
+                    <CheckCircle2 size={14} className="text-emerald-500 shrink-0"/>
+                    <span>Diverse cuisines to attract more customers</span>
+                  </div>
+                  <div className="how-point-item">
+                    <CheckCircle2 size={14} className="text-emerald-500 shrink-0"/>
+                    <span>Easy to prepare with consistent quality</span>
+                  </div>
+                </div>
               </div>
 
-              <div className="how-points-list">
-                <div className="how-point-item">
-                  <CheckCircle2 size={14} className="text-emerald-500 shrink-0"/>
-                  <span>Chef curated, high margin items</span>
-                </div>
-                <div className="how-point-item">
-                  <CheckCircle2 size={14} className="text-emerald-500 shrink-0"/>
-                  <span>Diverse cuisines to attract more customers</span>
-                </div>
-                <div className="how-point-item">
-                  <CheckCircle2 size={14} className="text-emerald-500 shrink-0"/>
-                  <span>Easy to prepare with consistent quality</span>
-                </div>
-              </div>
+              <img src="/cuisine-north-indian.jpg" alt="Ready Recipes" className="how-dish-thumbnail"/>
             </div>
 
-            <img src="/cuisine-north-indian.jpg" alt="Ready Recipes" className="how-dish-thumbnail"/>
-          </div>
-
-          {/* Card 2: Semi-Prepared Items Sourced */}
-          <div className="how-card">
-            <div className="how-card-left">
-              <div className="how-card-header">
-                <div className="how-card-icon how-icon-green">
-                  <Package size={18}/>
+            {/* Card 2: Semi-Prepared Items Sourced */}
+            <div className="how-card">
+              <div className="how-card-left">
+                <div className="how-card-header">
+                  <div className="how-card-icon how-icon-green">
+                    <Package size={18}/>
+                  </div>
+                  <h4 className="how-card-title">Get Semi Prepared Items Sourced</h4>
                 </div>
-                <h4 className="how-card-title">Get Semi Prepared Items Sourced</h4>
+
+                <div className="how-points-list">
+                  <div className="how-point-item">
+                    <CheckCircle2 size={14} className="text-emerald-500 shrink-0"/>
+                    <span>Better pricing and higher margins</span>
+                  </div>
+                  <div className="how-point-item">
+                    <CheckCircle2 size={14} className="text-emerald-500 shrink-0"/>
+                    <span>Save time and reduce kitchen effort</span>
+                  </div>
+                  <div className="how-point-item">
+                    <CheckCircle2 size={14} className="text-emerald-500 shrink-0"/>
+                    <span>Consistent taste and quality</span>
+                  </div>
+                </div>
               </div>
 
-              <div className="how-points-list">
-                <div className="how-point-item">
-                  <CheckCircle2 size={14} className="text-emerald-500 shrink-0"/>
-                  <span>Better pricing and higher margins</span>
-                </div>
-                <div className="how-point-item">
-                  <CheckCircle2 size={14} className="text-emerald-500 shrink-0"/>
-                  <span>Save time and reduce kitchen effort</span>
-                </div>
-                <div className="how-point-item">
-                  <CheckCircle2 size={14} className="text-emerald-500 shrink-0"/>
-                  <span>Consistent taste and quality</span>
-                </div>
-              </div>
+              <img src="/small-changes-dish.png" alt="Semi Prepared Sourcing" className="how-dish-thumbnail"/>
             </div>
-
-            <img src="https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=300&q=80" alt="Semi Prepared Sourcing" className="how-dish-thumbnail"/>
           </div>
         </div>
 
@@ -329,6 +376,12 @@ export const ResultsPage = ({ data, onOpenLeadForm, onRecalculate, }) => {
               <ArrowRight size={16}/>
             </button>
           </div>
+        </div>
+
+        {/* Print-Only Professional Footer */}
+        <div className="print-footer-contact">
+          <span>Republic of Kitchens • Commercial Culinary Solutions &amp; Central Pantry • FSSAI License Certified</span>
+          <span>Support: +91 98765 43210 • partners@republickitchen.in • www.republickitchen.in</span>
         </div>
       </div>
     </div>);

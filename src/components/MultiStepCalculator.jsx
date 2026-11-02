@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, ArrowRight, Check, ShoppingBag, Store, Utensils, ChefHat, Users, IndianRupee, Percent, Lock } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, ShoppingBag, Store, Utensils, ChefHat, Users, IndianRupee, Percent, Lock, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { OUTLET_TYPES, CUISINES, MENU_ITEMS } from '../data/kitchenData';
 import '../styles/calculator.css';
@@ -50,7 +50,7 @@ export const MultiStepCalculator = ({ step = 1, onStepChange, onBackToHome, onCa
     const [city, setCity] = useState('');
     const [email, setEmail] = useState('');
     const [formErrors, setFormErrors] = useState({});
-    const totalSteps = 7;
+    const totalSteps = 5;
     // Toggle Cuisine
     const handleToggleCuisine = (cuisineId) => {
         if (selectedCuisines.includes(cuisineId)) {
@@ -73,6 +73,59 @@ export const MultiStepCalculator = ({ step = 1, onStepChange, onBackToHome, onCa
         }
         else {
             setSelectedMenuItems([...selectedMenuItems, item]);
+        }
+    };
+
+    const currentTabItems = MENU_ITEMS[activeCuisineTab] || MENU_ITEMS['north-indian'] || [];
+    const selectedInCurrentTabCount = currentTabItems.filter((item) => selectedMenuItems.includes(item)).length;
+    const allCurrentTabSelected = currentTabItems.length > 0 && selectedInCurrentTabCount === currentTabItems.length;
+
+    const handleToggleSelectAllCurrentTab = () => {
+        if (allCurrentTabSelected) {
+            setSelectedMenuItems((prev) => prev.filter((item) => !currentTabItems.includes(item)));
+        } else {
+            setSelectedMenuItems((prev) => Array.from(new Set([...prev, ...currentTabItems])));
+        }
+    };
+
+    const allAvailableItems = selectedCuisines.flatMap((cId) => MENU_ITEMS[cId] || []);
+    const allCuisinesSelected = allAvailableItems.length > 0 && allAvailableItems.every((item) => selectedMenuItems.includes(item));
+
+    const handleToggleSelectAllCuisines = () => {
+        if (allCuisinesSelected) {
+            setSelectedMenuItems((prev) => prev.filter((item) => !allAvailableItems.includes(item)));
+        } else {
+            setSelectedMenuItems((prev) => Array.from(new Set([...prev, ...allAvailableItems])));
+        }
+    };
+
+    const [expandedCuisines, setExpandedCuisines] = useState({ 'north-indian': true });
+
+    React.useEffect(() => {
+        if (selectedCuisines && selectedCuisines.length > 0) {
+            setExpandedCuisines((prev) => {
+                if (Object.keys(prev).length === 0) {
+                    return { [selectedCuisines[0]]: true };
+                }
+                return prev;
+            });
+        }
+    }, [selectedCuisines]);
+
+    const toggleExpandCuisine = (cId) => {
+        setExpandedCuisines((prev) => ({
+            ...prev,
+            [cId]: !prev[cId],
+        }));
+    };
+
+    const handleToggleSelectAllForCuisine = (cId) => {
+        const items = MENU_ITEMS[cId] || [];
+        const allSelected = items.length > 0 && items.every((i) => selectedMenuItems.includes(i));
+        if (allSelected) {
+            setSelectedMenuItems((prev) => prev.filter((i) => !items.includes(i)));
+        } else {
+            setSelectedMenuItems((prev) => Array.from(new Set([...prev, ...items])));
         }
     };
     const handleNext = () => {
@@ -167,7 +220,7 @@ export const MultiStepCalculator = ({ step = 1, onStepChange, onBackToHome, onCa
 
         {/* STEP 1: Outlet Type */}
         {currentStep === 1 && (<div>
-            <h2 className="question-title">What type of outlet do you operate?</h2>
+            <h2 className="question-title">What kind of outlet do you operate?</h2>
             <p className="question-subtitle">Select the option that best describes your business.</p>
 
             <div className="outlets-grid">
@@ -191,7 +244,7 @@ export const MultiStepCalculator = ({ step = 1, onStepChange, onBackToHome, onCa
 
         {/* STEP 2: Cuisines */}
         {currentStep === 2 && (<div>
-            <h2 className="question-title">Which cuisines do you serve?</h2>
+            <h2 className="question-title">What cuisines do you serve?</h2>
             <p className="question-subtitle">Select all that apply.</p>
 
             <div className="cuisines-grid">
@@ -226,16 +279,55 @@ export const MultiStepCalculator = ({ step = 1, onStepChange, onBackToHome, onCa
 
             {/* Layout with Checklist on left, Food preview on right */}
             <div className="menu-items-layout">
-              <div className="menu-checklist">
-                {(MENU_ITEMS[activeCuisineTab] || MENU_ITEMS['north-indian']).map((item) => {
-                const isChecked = selectedMenuItems.includes(item);
-                return (<div key={item} className={`menu-checkbox-item ${isChecked ? 'checked' : ''}`} onClick={() => handleToggleMenuItem(item)}>
-                      <div className="custom-checkbox-box">
-                        {isChecked && <Check size={13}/>}
+              <div className="menu-checklist-column">
+                {/* Select All Toolbar */}
+                <div className="menu-checklist-toolbar">
+                  <button
+                    type="button"
+                    className={`menu-select-all-btn ${allCurrentTabSelected ? 'active' : ''}`}
+                    onClick={handleToggleSelectAllCurrentTab}
+                  >
+                    <div className="custom-checkbox-box">
+                      {allCurrentTabSelected && <Check size={13} />}
+                    </div>
+                    <span className="menu-select-all-text">
+                      {allCurrentTabSelected ? 'Deselect All' : 'Select All Items'}
+                    </span>
+                  </button>
+
+                  <div className="menu-checklist-toolbar-right">
+                    {selectedCuisines.length > 1 && (
+                      <button
+                        type="button"
+                        className="menu-select-all-global-btn"
+                        onClick={handleToggleSelectAllCuisines}
+                      >
+                        {allCuisinesSelected ? 'Clear all cuisines' : 'Select across all cuisines'}
+                      </button>
+                    )}
+                    <span className="menu-select-all-badge">
+                      {selectedInCurrentTabCount} of {currentTabItems.length} selected
+                    </span>
+                  </div>
+                </div>
+
+                <div className="menu-checklist">
+                  {currentTabItems.map((item) => {
+                    const isChecked = selectedMenuItems.includes(item);
+                    return (
+                      <div
+                        key={item}
+                        className={`menu-checkbox-item ${isChecked ? 'checked' : ''}`}
+                        onClick={() => handleToggleMenuItem(item)}
+                      >
+                        <div className="custom-checkbox-box">
+                          {isChecked && <Check size={13} />}
+                        </div>
+                        <span className="menu-item-name">{item}</span>
                       </div>
-                      <span className="menu-item-name">{item}</span>
-                    </div>);
-            })}
+                    );
+                  })}
+                </div>
               </div>
 
               <div className="menu-side-preview">
@@ -247,95 +339,169 @@ export const MultiStepCalculator = ({ step = 1, onStepChange, onBackToHome, onCa
             </div>
           </div>)}
 
-        {/* STEP 4: Footfall */}
-        {currentStep === 4 && (<div>
-            <h2 className="question-title">What is your average daily customer footfall?</h2>
-            <p className="question-subtitle">How many customers do you serve per day on average?</p>
+        {/* STEP 4: Combined Business Economics (Footfall, AOV, Margin) */}
+        {currentStep === 4 && (
+          <div className="step-economics-container">
+            <h2 className="question-title">Tell us about your kitchen&apos;s business numbers</h2>
+            <p className="question-subtitle">
+              Set your daily footfall, average order value, and current margin to estimate your profits.
+            </p>
 
-            <div className="numeric-input-card">
-              <div className="input-display-box">
-                <div className="input-display-left">
-                  <div className="input-icon-box">
-                    <Users size={22}/>
+            <div className="combined-metrics-grid">
+              {/* Metric 1: Footfall */}
+              <div className="combined-metric-card">
+                <div className="combined-metric-header">
+                  <div className="combined-metric-title-group">
+                    <div className="combined-metric-icon icon-blue">
+                      <Users size={18} />
+                    </div>
+                    <div>
+                      <h3 className="combined-metric-title">Average Daily Customer Footfall</h3>
+                      <p className="combined-metric-desc">How many customers do you serve per day on average?</p>
+                    </div>
                   </div>
-                  <input type="number" min="10" max="3000" value={footfall} onChange={(e) => setFootfall(Math.max(1, Number(e.target.value)))} className="numeric-value-input"/>
+                  <div className="combined-metric-input-badge">
+                    <input
+                      type="number"
+                      min="10"
+                      max="3000"
+                      value={footfall}
+                      onChange={(e) => setFootfall(Math.max(1, Number(e.target.value)))}
+                      className="combined-metric-number"
+                    />
+                    <span className="combined-metric-unit">customers / day</span>
+                  </div>
                 </div>
-                <span className="input-unit-label">customers per day</span>
+
+                <div className="slider-track-container">
+                  <input
+                    type="range"
+                    min="10"
+                    max="1000"
+                    step="10"
+                    value={footfall}
+                    onChange={(e) => setFootfall(Number(e.target.value))}
+                    className="custom-range-slider"
+                  />
+                  <div className="slider-scale-labels">
+                    <span>10</span>
+                    <span>100</span>
+                    <span>250</span>
+                    <span>500</span>
+                    <span>1000+</span>
+                  </div>
+                </div>
               </div>
 
-              <div className="slider-track-container">
-                <input type="range" min="10" max="1000" step="10" value={footfall} onChange={(e) => setFootfall(Number(e.target.value))} className="custom-range-slider"/>
-                <div className="slider-scale-labels">
-                  <span>0</span>
-                  <span>100</span>
-                  <span>250</span>
-                  <span>500</span>
-                  <span>1000+</span>
+              {/* Metric 2: Average Order Value */}
+              <div className="combined-metric-card">
+                <div className="combined-metric-header">
+                  <div className="combined-metric-title-group">
+                    <div className="combined-metric-icon icon-orange">
+                      <IndianRupee size={18} />
+                    </div>
+                    <div>
+                      <h3 className="combined-metric-title">Average Order Value (AOV)</h3>
+                      <p className="combined-metric-desc">Average amount spent per order by a customer</p>
+                    </div>
+                  </div>
+                  <div className="combined-metric-input-badge">
+                    <span className="rupee-prefix">₹</span>
+                    <input
+                      type="number"
+                      min="50"
+                      max="5000"
+                      value={aov}
+                      onChange={(e) => setAov(Math.max(1, Number(e.target.value)))}
+                      className="combined-metric-number"
+                    />
+                    <span className="combined-metric-unit">INR / order</span>
+                  </div>
+                </div>
+
+                <div className="slider-track-container">
+                  <input
+                    type="range"
+                    min="50"
+                    max="2000"
+                    step="25"
+                    value={aov}
+                    onChange={(e) => setAov(Number(e.target.value))}
+                    className="custom-range-slider"
+                  />
+                  <div className="slider-scale-labels">
+                    <span>₹50</span>
+                    <span>₹200</span>
+                    <span>₹500</span>
+                    <span>₹1000</span>
+                    <span>₹2000+</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Metric 3: Current Average Margin */}
+              <div className="combined-metric-card">
+                <div className="combined-metric-header">
+                  <div className="combined-metric-title-group">
+                    <div className="combined-metric-icon icon-green">
+                      <Percent size={18} />
+                    </div>
+                    <div>
+                      <h3 className="combined-metric-title">Current Average Margin</h3>
+                      <p className="combined-metric-desc">Your current net operating margin percentage</p>
+                    </div>
+                  </div>
+                  <div className="combined-metric-input-badge">
+                    <input
+                      type="number"
+                      min="1"
+                      max="60"
+                      value={currentMargin}
+                      onChange={(e) => setCurrentMargin(Math.max(1, Number(e.target.value)))}
+                      className="combined-metric-number"
+                    />
+                    <span className="combined-metric-unit">% margin</span>
+                  </div>
+                </div>
+
+                <div className="slider-track-container">
+                  <input
+                    type="range"
+                    min="0"
+                    max="50"
+                    step="1"
+                    value={currentMargin}
+                    onChange={(e) => setCurrentMargin(Number(e.target.value))}
+                    className="custom-range-slider"
+                  />
+                  <div className="slider-scale-labels">
+                    <span>0%</span>
+                    <span>10%</span>
+                    <span>20%</span>
+                    <span>30%</span>
+                    <span>50%</span>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>)}
 
-        {/* STEP 5: Average Order Value */}
-        {currentStep === 5 && (<div>
-            <h2 className="question-title">What is your average order value?</h2>
-            <p className="question-subtitle">Enter the average amount a customer spends per order.</p>
-
-            <div className="numeric-input-card">
-              <div className="input-display-box">
-                <div className="input-display-left">
-                  <div className="input-icon-box">
-                    <IndianRupee size={22}/>
-                  </div>
-                  <input type="number" min="50" max="5000" value={aov} onChange={(e) => setAov(Math.max(1, Number(e.target.value)))} className="numeric-value-input"/>
-                </div>
-                <span className="input-unit-label">INR per order</span>
+            {/* Live Monthly Revenue Estimator Bar */}
+            <div className="live-revenue-preview-bar">
+              <div className="live-revenue-label">
+                <span>Estimated Monthly Revenue</span>
+                <span className="live-revenue-calc-formula">
+                  ({footfall} orders/day × 30 days × ₹{aov})
+                </span>
               </div>
-
-              <div className="slider-track-container">
-                <input type="range" min="50" max="2000" step="25" value={aov} onChange={(e) => setAov(Number(e.target.value))} className="custom-range-slider"/>
-                <div className="slider-scale-labels">
-                  <span>0</span>
-                  <span>200</span>
-                  <span>500</span>
-                  <span>1000</span>
-                  <span>2000+</span>
-                </div>
+              <div className="live-revenue-value">
+                ₹{(footfall * 30 * aov).toLocaleString('en-IN')}
               </div>
             </div>
-          </div>)}
+          </div>
+        )}
 
-        {/* STEP 6: Average Margin */}
-        {currentStep === 6 && (<div>
-            <h2 className="question-title">What is your average margin per item?</h2>
-            <p className="question-subtitle">Enter your current average margin percentage.</p>
-
-            <div className="numeric-input-card">
-              <div className="input-display-box">
-                <div className="input-display-left">
-                  <div className="input-icon-box">
-                    <Percent size={20}/>
-                  </div>
-                  <input type="number" min="1" max="60" value={currentMargin} onChange={(e) => setCurrentMargin(Math.max(1, Number(e.target.value)))} className="numeric-value-input"/>
-                </div>
-                <span className="input-unit-label">% margin</span>
-              </div>
-
-              <div className="slider-track-container">
-                <input type="range" min="0" max="50" step="1" value={currentMargin} onChange={(e) => setCurrentMargin(Number(e.target.value))} className="custom-range-slider"/>
-                <div className="slider-scale-labels">
-                  <span>0</span>
-                  <span>10</span>
-                  <span>20</span>
-                  <span>30</span>
-                  <span>50</span>
-                </div>
-              </div>
-            </div>
-          </div>)}
-
-        {/* STEP 7: Enter Details to Calculate (Pre-Calculation Lead Gate) */}
-        {currentStep === 7 && (<div className="step-lead-container">
+        {/* STEP 5: Enter Details to Calculate (Pre-Calculation Lead Gate) */}
+        {currentStep === 5 && (<div className="step-lead-container">
             <div className="step-lead-header">
               <span className="step-lead-badge">Final Step • Almost Ready</span>
               <h2 className="question-title">Enter Details to Calculate Your Profits</h2>
@@ -416,7 +582,7 @@ export const MultiStepCalculator = ({ step = 1, onStepChange, onBackToHome, onCa
             <span>
               {currentStep === totalSteps
             ? 'Calculate My Results'
-            : currentStep === 6
+            : currentStep === totalSteps - 1
                 ? 'Proceed to Calculate'
                 : 'Next'}
             </span>
