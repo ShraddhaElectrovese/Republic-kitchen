@@ -158,6 +158,13 @@
   object-fit: cover;
 }
 
+/* Mobile-only content hidden on desktop by default */
+.outlet-mobile-content,
+.cuisine-mobile-only,
+.menu-mobile-only {
+  display: none !important;
+}
+
 /* Step 2: Cuisines Grid */
 .cuisines-grid {
   display: grid;
@@ -753,16 +760,330 @@
   display: block;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 860px) {
   .calculator-page-bg {
-    padding: 20px 0 50px;
+    padding: 16px 0 40px;
   }
   .calculator-card-container {
-    padding: 24px 20px;
+    padding: 24px 16px;
+    border-radius: 20px;
   }
+  .question-title {
+    font-size: 22px;
+    line-height: 1.25;
+    margin-bottom: 6px;
+  }
+  .question-subtitle {
+    font-size: 13.5px;
+    margin-bottom: 24px;
+  }
+
+  /* Outlet Step 1 Mobile Layout (Matches Image 2) */
+  .outlet-desktop-only {
+    display: none !important;
+  }
+
   .outlets-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 28px;
   }
+
+  .outlet-selection-card {
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1.5px solid #e2e8f0;
+    background: #ffffff;
+    box-shadow: none;
+    transform: none !important;
+    min-height: auto;
+  }
+
+  .outlet-selection-card:hover {
+    transform: none !important;
+  }
+
+  .outlet-selection-card.selected {
+    border-color: #ff4e27;
+    background-color: #fff9f6;
+    box-shadow: 0 2px 8px rgba(255, 78, 39, 0.08);
+  }
+
+  .outlet-mobile-content {
+    display: flex !important;
+    align-items: center;
+    width: 100%;
+    gap: 14px;
+  }
+
+  .outlet-mobile-icon {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #1e293b;
+    flex-shrink: 0;
+  }
+
+  .outlet-mobile-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .outlet-mobile-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.25;
+  }
+
+  .outlet-mobile-desc {
+    font-size: 12.5px;
+    font-weight: 400;
+    color: #64748b;
+    line-height: 1.35;
+    margin-top: 3px;
+  }
+
+  .outlet-mobile-radio {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #cbd5e1;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+  }
+
+  .outlet-mobile-radio.selected {
+    border-color: #ff4e27;
+  }
+
+  .outlet-mobile-radio-inner {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ff4e27;
+  }
+
+  /* Desktop-only elements hidden on mobile */
+  .outlet-desktop-only,
+  .cuisine-desktop-only,
+  .menu-desktop-only {
+    display: none !important;
+  }
+
+  /* Show mobile elements */
+  .cuisine-mobile-only,
+  .menu-mobile-only {
+    display: flex !important;
+  }
+
+  /* Step 2 Mobile List (Matches Image 2) */
+  .cuisine-mobile-list {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+    width: 100%;
+  }
+
+  .cuisine-mobile-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 16px;
+    border-radius: 12px;
+    border: 1.5px solid #e2e8f0;
+    background: #ffffff;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+
+  .cuisine-mobile-item.selected {
+    border-color: #ff4e27;
+    background-color: #fff9f6;
+    box-shadow: 0 2px 8px rgba(255, 78, 39, 0.08);
+  }
+
+  .cuisine-mobile-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .cuisine-mobile-checkbox {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 2px solid #cbd5e1;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+  }
+
+  .cuisine-mobile-checkbox.checked {
+    background-color: #ff4e27;
+    border-color: #ff4e27;
+  }
+
+  .cuisine-mobile-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .cuisine-mobile-chevron {
+    color: #94a3b8;
+    transition: color 0.15s ease;
+  }
+
+  .cuisine-mobile-chevron.selected {
+    color: #ff4e27;
+  }
+
+  /* Step 3 Mobile Accordions (Matches Image 3) */
+  .menu-mobile-accordions {
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 28px;
+    width: 100%;
+  }
+
+  .mobile-accordion-card {
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    background: #ffffff;
+    overflow: hidden;
+    transition: all 0.15s ease;
+  }
+
+  .mobile-accordion-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: #f8fafc;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .mobile-accordion-card.expanded .mobile-accordion-header {
+    border-bottom: 1px solid #f1f5f9;
+  }
+
+  .mobile-accordion-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .mobile-accordion-icon {
+    color: #64748b;
+  }
+
+  .mobile-accordion-content {
+    padding: 6px 12px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .mobile-item-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.12s ease;
+  }
+
+  .mobile-item-row:hover {
+    background: #f8fafc;
+  }
+
+  .mobile-item-row.select-all-row {
+    border-bottom: 1px dashed #e2e8f0;
+    padding-bottom: 10px;
+    margin-bottom: 4px;
+    border-radius: 0;
+  }
+
+  .mobile-item-checkbox {
+    width: 19px;
+    height: 19px;
+    border-radius: 4px;
+    border: 1.5px solid #cbd5e1;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.12s ease;
+  }
+
+  .mobile-item-checkbox.checked {
+    background-color: #ff4e27;
+    border-color: #ff4e27;
+  }
+
+  .mobile-item-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #1e293b;
+  }
+
+  .mobile-item-label.select-all-label {
+    font-weight: 600;
+    color: #0f172a;
+  }
+
+  /* Actions Bar on Mobile */
+  .calculator-actions-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .btn-back-desktop-only {
+    display: none !important;
+  }
+
+  .btn-calculator-back {
+    flex: 1;
+    justify-content: center;
+    padding: 12px 16px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 10px;
+    background: #ffffff;
+    color: #1e293b;
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .btn-calculator-next {
+    flex: 2;
+    justify-content: center;
+    padding: 12px 18px;
+    font-size: 14.5px;
+    border-radius: 10px;
+  }
+
+  .step-1-actions .btn-calculator-next {
+    flex: 1;
+    width: 100%;
+  }
+
   .cuisines-grid {
     grid-template-columns: 1fr;
   }

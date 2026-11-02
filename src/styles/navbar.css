@@ -142,21 +142,80 @@
   .mobile-menu-btn {
     display: block;
   }
+  .navbar-cta-btn {
+    padding: 6px 12px;
+    font-size: 12px;
+    gap: 5px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+  .navbar-cta-btn svg {
+    width: 13px;
+    height: 13px;
+  }
 }
 
 @media (max-width: 640px) {
   .navbar-inner {
-    height: 58px;
-    padding: 0 16px;
+    height: 56px;
+    padding: 0 14px;
+    gap: 8px;
+  }
+  .navbar-brand {
+    gap: 8px;
   }
   .brand-logo-wrapper {
-    width: 44px;
-    height: 44px;
+    width: 40px;
+    height: 40px;
   }
   .brand-title-main {
-    font-size: 14.5px;
+    font-size: 13.5px;
   }
   .brand-tagline {
     display: none;
+  }
+  .navbar-cta-btn {
+    padding: 5px 9px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    gap: 4px;
+    border-radius: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .navbar-cta-btn svg {
+    width: 11px;
+    height: 11px;
+  }
+  .mobile-menu-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .navbar-inner {
+    padding: 0 10px;
+    gap: 6px;
+  }
+  .brand-logo-wrapper {
+    width: 34px;
+    height: 34px;
+  }
+  .brand-title-main {
+    font-size: 12px;
+  }
+  .navbar-cta-btn {
+    padding: 4px 7px;
+    font-size: 10px;
+    gap: 3px;
+  }
+  .navbar-cta-btn svg {
+    width: 10px;
+    height: 10px;
   }
 }
