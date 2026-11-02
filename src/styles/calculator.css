@@ -747,6 +747,12 @@
   max-width: 640px;
 }
 
+.form-row-two-col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
 .input-error {
   border-color: #ef4444 !important;
   background-color: #fff5f5 !important;
@@ -1082,6 +1088,11 @@
   .step-1-actions .btn-calculator-next {
     flex: 1;
     width: 100%;
+  }
+
+  .form-row-two-col {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .cuisines-grid {

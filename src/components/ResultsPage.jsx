@@ -240,7 +240,8 @@ export const ResultsPage = ({ data, onOpenLeadForm, onRecalculate, }) => {
             </span>
           </div>
 
-          <div className="items-table-wrapper">
+          {/* Desktop Table (Preserved 100%) */}
+          <div className="items-table-wrapper items-table-desktop-only">
             <table className="items-margin-table">
               <thead>
                 <tr>
@@ -282,6 +283,48 @@ export const ResultsPage = ({ data, onOpenLeadForm, onRecalculate, }) => {
         })}
               </tbody>
             </table>
+          </div>
+
+          {/* Mobile-Optimized Clean List (Eliminating container-in-container) */}
+          <div className="items-mobile-clean-card items-mobile-only">
+            {displayItems.map((item, idx) => {
+              const eco = getItemEconomics(item, data.currentMargin);
+              const isLast = idx === displayItems.length - 1;
+              const marginDiff = eco.recommendedMargin - data.currentMargin;
+              return (
+                <div key={item} className={`mobile-clean-item-row ${isLast ? 'last' : ''}`}>
+                  {/* Top row: Name + Savings */}
+                  <div className="mobile-clean-item-top">
+                    <span className="mobile-clean-item-name">{item}</span>
+                    <span className="mobile-clean-savings-badge">
+                      Save {eco.savingPerPortion}
+                    </span>
+                  </div>
+
+                  {/* Flat Margin Progression */}
+                  <div className="mobile-clean-margins">
+                    <span className="mobile-clean-margin-curr">
+                      <span className="clean-label">Current:</span> {data.currentMargin}%
+                    </span>
+                    <span className="mobile-clean-margin-arrow">→</span>
+                    <span className="mobile-clean-margin-target">
+                      <span className="clean-label">Target:</span> {eco.recommendedMargin}%
+                    </span>
+                    {marginDiff > 0 && (
+                      <span className="mobile-clean-margin-diff">
+                        +{marginDiff}%
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Clean Sourcing Detail */}
+                  <div className="mobile-clean-sourcing">
+                    <span className="sourcing-label">Sourcing:</span>
+                    <span className="sourcing-text">{eco.sourcing}</span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
 
