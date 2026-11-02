@@ -189,24 +189,15 @@ export const MultiStepCalculator = ({ step = 1, onStepChange, onBackToHome, onCa
             onBackToHome();
         }
     };
-    const renderOutletIcon = (iconName) => {
-        switch (iconName) {
-            case 'ShoppingBag': return <ShoppingBag size={20}/>;
-            case 'Store': return <Store size={20}/>;
-            case 'Utensils': return <Utensils size={20}/>;
-            case 'ChefHat': return <ChefHat size={20}/>;
-            default: return <Store size={20}/>;
-        }
-    };
-    const renderMobileOutletIcon = (iconName) => {
+    const renderOutletIcon = (iconName, size = 30) => {
         switch (iconName) {
             case 'ShoppingBag':
-                return <ShoppingBag size={28} strokeWidth={1.6} />;
+                return <ShoppingBag size={size} strokeWidth={1.6} />;
             case 'Store':
-                return <Store size={28} strokeWidth={1.6} />;
+                return <Store size={size} strokeWidth={1.6} />;
             case 'Utensils':
                 return (
-                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M6 10h12" />
                     <path d="M8 10v9" />
                     <path d="M16 10v9" />
@@ -217,9 +208,9 @@ export const MultiStepCalculator = ({ step = 1, onStepChange, onBackToHome, onCa
                   </svg>
                 );
             case 'ChefHat':
-                return <ChefHat size={28} strokeWidth={1.6} />;
+                return <ChefHat size={size} strokeWidth={1.6} />;
             default:
-                return <Store size={28} strokeWidth={1.6} />;
+                return <Store size={size} strokeWidth={1.6} />;
         }
     };
     return (<div className="calculator-page-bg">
@@ -256,32 +247,15 @@ export const MultiStepCalculator = ({ step = 1, onStepChange, onBackToHome, onCa
                     className={`outlet-selection-card ${isSelected ? 'selected' : ''}`}
                     onClick={() => setOutletType(ot.id)}
                   >
-                    {/* Desktop View Layout (Preserved 100%) */}
-                    <div className="outlet-card-top outlet-desktop-only">
-                      <div className="outlet-card-icon">
-                        {renderOutletIcon(ot.iconName)}
-                      </div>
-                      <span className="outlet-card-name">{ot.name}</span>
-                      {isSelected && (
-                        <div className="outlet-card-check">
-                          <Check size={14}/>
-                        </div>
-                      )}
+                    <div className="outlet-card-icon-col">
+                      {renderOutletIcon(ot.iconName)}
                     </div>
-                    <img src={ot.image} alt={ot.name} className="outlet-card-img outlet-desktop-only"/>
-
-                    {/* Mobile Optimized Layout (Matches Image 2) */}
-                    <div className="outlet-mobile-content">
-                      <div className="outlet-mobile-icon">
-                        {renderMobileOutletIcon(ot.iconName)}
-                      </div>
-                      <div className="outlet-mobile-info">
-                        <span className="outlet-mobile-name">{ot.name}</span>
-                        <span className="outlet-mobile-desc">{ot.description}</span>
-                      </div>
-                      <div className={`outlet-mobile-radio ${isSelected ? 'selected' : ''}`}>
-                        {isSelected && <div className="outlet-mobile-radio-inner" />}
-                      </div>
+                    <div className="outlet-card-text-col">
+                      <span className="outlet-card-title">{ot.name}</span>
+                      <span className="outlet-card-desc">{ot.description}</span>
+                    </div>
+                    <div className={`outlet-card-radio ${isSelected ? 'selected' : ''}`}>
+                      {isSelected && <div className="outlet-card-radio-inner" />}
                     </div>
                   </div>
                 );
@@ -294,37 +268,22 @@ export const MultiStepCalculator = ({ step = 1, onStepChange, onBackToHome, onCa
             <h2 className="question-title">What cuisines do you serve?</h2>
             <p className="question-subtitle">Select all that apply.</p>
 
-            {/* Desktop View (Grid with Photo Banners) */}
-            <div className="cuisines-grid cuisine-desktop-only">
-              {CUISINES.map((c) => {
-                const isSelected = selectedCuisines.includes(c.id);
-                return (<div key={c.id} className={`cuisine-selection-card ${isSelected ? 'selected' : ''}`} onClick={() => handleToggleCuisine(c.id)}>
-                    {isSelected && (<div className="cuisine-card-badge">
-                        <Check size={12}/>
-                      </div>)}
-                    <img src={c.image} alt={c.name} className="cuisine-card-img"/>
-                    <span className="cuisine-card-name">{c.name}</span>
-                  </div>);
-              })}
-            </div>
-
-            {/* Mobile View (Clean List with Checkbox & Chevron, matching Image 2) */}
-            <div className="cuisine-mobile-list cuisine-mobile-only">
+            <div className="cuisines-grid-unified">
               {CUISINES.map((c) => {
                 const isSelected = selectedCuisines.includes(c.id);
                 return (
                   <div
                     key={c.id}
-                    className={`cuisine-mobile-item ${isSelected ? 'selected' : ''}`}
+                    className={`cuisine-unified-item ${isSelected ? 'selected' : ''}`}
                     onClick={() => handleToggleCuisine(c.id)}
                   >
-                    <div className="cuisine-mobile-left">
-                      <div className={`cuisine-mobile-checkbox ${isSelected ? 'checked' : ''}`}>
-                        {isSelected && <Check size={13} color="#ffffff" strokeWidth={3} />}
+                    <div className="cuisine-unified-left">
+                      <div className={`cuisine-unified-checkbox ${isSelected ? 'checked' : ''}`}>
+                        {isSelected && <Check size={14} color="#ffffff" strokeWidth={3} />}
                       </div>
-                      <span className="cuisine-mobile-name">{c.mobileName || c.name}</span>
+                      <span className="cuisine-unified-name">{c.mobileName || c.name}</span>
                     </div>
-                    <ChevronRight size={18} className={`cuisine-mobile-chevron ${isSelected ? 'selected' : ''}`} />
+                    <ChevronRight size={18} className={`cuisine-unified-chevron ${isSelected ? 'selected' : ''}`} />
                   </div>
                 );
               })}
@@ -336,134 +295,68 @@ export const MultiStepCalculator = ({ step = 1, onStepChange, onBackToHome, onCa
             <h2 className="question-title">Select the items you currently sell</h2>
             <p className="question-subtitle">Choose from the items based on the cuisines selected.</p>
 
-            {/* Desktop View (Tabs + Checklist + Side Photo Preview) */}
-            <div className="menu-desktop-only">
-              {/* Horizontal Tabs */}
-              <div className="menu-items-tabs-row">
-                {selectedCuisines.map((cId) => {
-                  const cuisineObj = CUISINES.find((c) => c.id === cId);
-                  const isActive = activeCuisineTab === cId;
-                  return (<button key={cId} type="button" className={`menu-tab-btn ${isActive ? 'active' : ''}`} onClick={() => setActiveCuisineTab(cId)}>
-                      {cuisineObj ? cuisineObj.name : cId}
-                    </button>);
-              })}
-              </div>
-
-              {/* Layout with Checklist on left, Food preview on right */}
-              <div className="menu-items-layout">
-                <div className="menu-checklist-column">
-                  {/* Select All Toolbar */}
-                  <div className="menu-checklist-toolbar">
-                    <button
-                      type="button"
-                      className={`menu-select-all-btn ${allCurrentTabSelected ? 'active' : ''}`}
-                      onClick={handleToggleSelectAllCurrentTab}
-                    >
-                      <div className="custom-checkbox-box">
-                        {allCurrentTabSelected && <Check size={13} />}
-                      </div>
-                      <span className="menu-select-all-text">
-                        {allCurrentTabSelected ? 'Deselect All' : 'Select All Items'}
-                      </span>
-                    </button>
-
-                    <div className="menu-checklist-toolbar-right">
-                      {selectedCuisines.length > 1 && (
-                        <button
-                          type="button"
-                          className="menu-select-all-global-btn"
-                          onClick={handleToggleSelectAllCuisines}
-                        >
-                          {allCuisinesSelected ? 'Clear all cuisines' : 'Select across all cuisines'}
-                        </button>
-                      )}
-                      <span className="menu-select-all-badge">
-                        {selectedInCurrentTabCount} of {currentTabItems.length} selected
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className="menu-checklist">
-                    {currentTabItems.map((item) => {
-                      const isChecked = selectedMenuItems.includes(item);
-                      return (
-                        <div
-                          key={item}
-                          className={`menu-checkbox-item ${isChecked ? 'checked' : ''}`}
-                          onClick={() => handleToggleMenuItem(item)}
-                        >
-                          <div className="custom-checkbox-box">
-                            {isChecked && <Check size={13} />}
-                          </div>
-                          <span className="menu-item-name">{item}</span>
-                        </div>
-                      );
-                    })}
-                  </div>
-                </div>
-
-                <div className="menu-side-preview">
-                  <img src={CUISINE_PREVIEWS[activeCuisineTab]?.image || CUISINES.find((c) => c.id === activeCuisineTab)?.image || '/cuisine-north-indian.jpg'} alt={CUISINE_PREVIEWS[activeCuisineTab]?.alt || 'Cuisine Preview'} className="menu-preview-img" key={activeCuisineTab}/>
-                  <p className="menu-preview-caption">
-                    {CUISINE_PREVIEWS[activeCuisineTab]?.caption || 'Standardized base gravies & preps reduce kitchen cook time to under 180 seconds.'}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Mobile View (Accordions per Selected Cuisine, matching Image 3) */}
-            <div className="menu-mobile-accordions menu-mobile-only">
+            <div className="menu-accordions-unified">
               {selectedCuisines.map((cId) => {
                 const cuisineObj = CUISINES.find((c) => c.id === cId) || { id: cId, name: cId, mobileName: cId };
                 const isExpanded = !!expandedCuisines[cId];
                 const items = MENU_ITEMS[cId] || [];
-                const allSelected = items.length > 0 && items.every((i) => selectedMenuItems.includes(i));
+                const selectedCount = items.filter((i) => selectedMenuItems.includes(i)).length;
+                const allSelected = items.length > 0 && selectedCount === items.length;
 
                 return (
-                  <div key={cId} className={`mobile-accordion-card ${isExpanded ? 'expanded' : ''}`}>
+                  <div key={cId} className={`unified-accordion-card ${isExpanded ? 'expanded' : ''}`}>
                     <div
-                      className="mobile-accordion-header"
+                      className="unified-accordion-header"
                       onClick={() => toggleExpandCuisine(cId)}
                     >
-                      <span className="mobile-accordion-title">
-                        {cuisineObj.mobileName || cuisineObj.name}
-                      </span>
+                      <div className="unified-accordion-header-left">
+                        <span className="unified-accordion-title">
+                          {cuisineObj.mobileName || cuisineObj.name}
+                        </span>
+                        <span className="unified-accordion-badge">
+                          {selectedCount} of {items.length} selected
+                        </span>
+                      </div>
                       {isExpanded ? (
-                        <ChevronUp size={20} className="mobile-accordion-icon" />
+                        <ChevronUp size={20} className="unified-accordion-icon" />
                       ) : (
-                        <ChevronDown size={20} className="mobile-accordion-icon" />
+                        <ChevronDown size={20} className="unified-accordion-icon" />
                       )}
                     </div>
 
                     {isExpanded && (
-                      <div className="mobile-accordion-content">
+                      <div className="unified-accordion-content">
                         {/* Select All Row */}
                         <div
-                          className="mobile-item-row select-all-row"
+                          className="unified-item-row select-all-row"
                           onClick={() => handleToggleSelectAllForCuisine(cId)}
                         >
-                          <div className={`mobile-item-checkbox ${allSelected ? 'checked' : ''}`}>
+                          <div className={`unified-item-checkbox ${allSelected ? 'checked' : ''}`}>
                             {allSelected && <Check size={13} color="#ffffff" strokeWidth={3} />}
                           </div>
-                          <span className="mobile-item-label select-all-label">Select All</span>
+                          <span className="unified-item-label select-all-label">
+                            {allSelected ? 'Deselect All' : 'Select All Items'}
+                          </span>
                         </div>
 
-                        {/* Items */}
-                        {items.map((item) => {
-                          const isChecked = selectedMenuItems.includes(item);
-                          return (
-                            <div
-                              key={item}
-                              className={`mobile-item-row ${isChecked ? 'selected' : ''}`}
-                              onClick={() => handleToggleMenuItem(item)}
-                            >
-                              <div className={`mobile-item-checkbox ${isChecked ? 'checked' : ''}`}>
-                                {isChecked && <Check size={13} color="#ffffff" strokeWidth={3} />}
+                        {/* Items Checklist Grid */}
+                        <div className="unified-items-grid">
+                          {items.map((item) => {
+                            const isChecked = selectedMenuItems.includes(item);
+                            return (
+                              <div
+                                key={item}
+                                className={`unified-item-row ${isChecked ? 'selected' : ''}`}
+                                onClick={() => handleToggleMenuItem(item)}
+                              >
+                                <div className={`unified-item-checkbox ${isChecked ? 'checked' : ''}`}>
+                                  {isChecked && <Check size={13} color="#ffffff" strokeWidth={3} />}
+                                </div>
+                                <span className="unified-item-label">{item}</span>
                               </div>
-                              <span className="mobile-item-label">{item}</span>
-                            </div>
-                          );
-                        })}
+                            );
+                          })}
+                        </div>
                       </div>
                     )}
                   </div>

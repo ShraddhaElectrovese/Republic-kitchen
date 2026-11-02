@@ -81,310 +81,285 @@
   margin-bottom: 32px;
 }
 
-/* Step 1: Outlet Cards */
+/* Step 1: Outlets Grid (Clean Design for Desktop & Mobile) */
 .outlets-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  gap: 16px;
   margin-bottom: 36px;
 }
 
 .outlet-selection-card {
   border: 1.5px solid #e2e8f0;
-  border-radius: 18px;
-  padding: 20px;
+  border-radius: 16px;
+  padding: 18px 20px;
   background: #ffffff;
   cursor: pointer;
-  position: relative;
   transition: all 0.2s ease;
   display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
 }
 
 .outlet-selection-card:hover {
   border-color: #cbd5e1;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
 .outlet-selection-card.selected {
-  border-color: var(--primary-orange);
-  background: #fffaf8;
-  box-shadow: 0 4px 16px rgba(242, 92, 39, 0.12);
-}
-
-.outlet-card-top {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-}
-
-.outlet-card-icon {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  background: #fff2ed;
-  color: var(--primary-orange);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.outlet-card-name {
-  font-size: 16px;
-  font-weight: 700;
-  color: #1e293b;
-  margin-left: 12px;
-  flex: 1;
-}
-
-.outlet-card-check {
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: var(--primary-orange);
-  color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.outlet-card-img {
-  width: 100%;
-  height: 120px;
-  border-radius: 12px;
-  object-fit: cover;
-}
-
-/* Mobile-only content hidden on desktop by default */
-.outlet-mobile-content,
-.cuisine-mobile-only,
-.menu-mobile-only {
-  display: none !important;
-}
-
-/* Step 2: Cuisines Grid */
-.cuisines-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-bottom: 36px;
-}
-
-.cuisine-selection-card {
-  border: 1.5px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 12px;
-  background: #ffffff;
-  cursor: pointer;
-  position: relative;
-  transition: all 0.2s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.cuisine-selection-card:hover {
-  border-color: #cbd5e1;
-  transform: translateY(-2px);
-}
-
-.cuisine-selection-card.selected {
-  border-color: var(--primary-orange);
-  background: #fffaf8;
-  box-shadow: 0 4px 14px rgba(242, 92, 39, 0.12);
-}
-
-.cuisine-card-img {
-  width: 100%;
-  height: 100px;
-  border-radius: 10px;
-  object-fit: cover;
-  margin-bottom: 10px;
-}
-
-.cuisine-card-name {
-  font-size: 13.5px;
-  font-weight: 700;
-  color: #1e293b;
-}
-
-.cuisine-card-badge {
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: var(--primary-orange);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-}
-
-/* Step 3: Menu Items Checklist & Tabs */
-.menu-items-tabs-row {
-  display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding-bottom: 8px;
-  margin-bottom: 24px;
-  border-bottom: 1px solid #f1f5f9;
-}
-
-.menu-tab-btn {
-  padding: 8px 18px;
-  border-radius: 9999px;
-  font-size: 13px;
-  font-weight: 600;
-  border: none;
-  cursor: pointer;
-  background: #f1f5f9;
-  color: #475569;
-  transition: all 0.15s ease;
-  white-space: nowrap;
-}
-
-.menu-tab-btn.active {
-  background: var(--primary-orange);
-  color: #ffffff;
-}
-
-.menu-items-layout {
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 32px;
-  align-items: flex-start;
-  margin-bottom: 36px;
-}
-
-.menu-checklist-column {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  min-width: 0;
-}
-
-.menu-checklist-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  padding: 10px 14px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  user-select: none;
-}
-
-.menu-select-all-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  color: #1e293b;
-  font-size: 13.5px;
-  font-weight: 600;
-  transition: all 0.15s ease;
-}
-
-.menu-select-all-btn:hover .custom-checkbox-box {
   border-color: #ff4e27;
+  background-color: #fff9f6;
+  box-shadow: 0 4px 14px rgba(255, 78, 39, 0.08);
 }
 
-.menu-select-all-btn.active .custom-checkbox-box {
-  background: #10b981;
-  border-color: #10b981;
-  color: #ffffff;
-}
-
-.menu-select-all-text {
-  letter-spacing: -0.01em;
-}
-
-.menu-checklist-toolbar-right {
+.outlet-card-icon-col {
+  width: 42px;
+  height: 42px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  justify-content: center;
+  color: #1e293b;
   flex-shrink: 0;
 }
 
-.menu-select-all-badge {
-  font-size: 11.5px;
-  font-weight: 600;
-  color: #64748b;
-  background: #ffffff;
-  padding: 3px 8px;
-  border-radius: 6px;
-  border: 1px solid #e2e8f0;
-  white-space: nowrap;
-}
-
-.menu-select-all-global-btn {
-  background: none;
-  border: none;
-  color: #ff4e27;
-  font-size: 11.5px;
-  font-weight: 600;
-  cursor: pointer;
-  padding: 2px 4px;
-  border-radius: 4px;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  white-space: nowrap;
-  transition: opacity 0.15s ease;
-}
-
-.menu-select-all-global-btn:hover {
-  opacity: 0.8;
-}
-
-.menu-checklist {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  max-height: 380px;
-  overflow-y: auto;
-  padding-right: 8px;
-}
-
-.menu-checkbox-item {
+.outlet-card-text-col {
   display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 14px;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.15s ease;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+  gap: 3px;
 }
 
-.menu-checkbox-item:hover {
-  background: #f8fafc;
+.outlet-card-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.25;
 }
 
-.menu-checkbox-item.checked {
-  background: #f0fdf4;
-  border-color: #86efac;
+.outlet-card-desc {
+  font-size: 13px;
+  font-weight: 400;
+  color: #64748b;
+  line-height: 1.35;
 }
 
-.custom-checkbox-box {
-  width: 18px;
-  height: 18px;
-  border-radius: 5px;
-  border: 1.5px solid #cbd5e1;
+.outlet-card-radio {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #cbd5e1;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
   transition: all 0.15s ease;
+}
+
+.outlet-card-radio.selected {
+  border-color: #ff4e27;
+}
+
+.outlet-card-radio-inner {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background-color: #ff4e27;
+}
+
+/* Step 2: Cuisines Grid (Clean Design for Desktop & Mobile) */
+.cuisines-grid-unified {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  margin-bottom: 36px;
+}
+
+.cuisine-unified-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-radius: 14px;
+  border: 1.5px solid #e2e8f0;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.cuisine-unified-item:hover {
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+}
+
+.cuisine-unified-item.selected {
+  border-color: #ff4e27;
+  background-color: #fff9f6;
+  box-shadow: 0 4px 14px rgba(255, 78, 39, 0.08);
+}
+
+.cuisine-unified-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.cuisine-unified-checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  border: 2px solid #cbd5e1;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.cuisine-unified-checkbox.checked {
+  background-color: #ff4e27;
+  border-color: #ff4e27;
+}
+
+.cuisine-unified-name {
+  font-size: 15.5px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.cuisine-unified-chevron {
+  color: #94a3b8;
+  transition: color 0.15s ease;
+}
+
+.cuisine-unified-chevron.selected {
+  color: #ff4e27;
+}
+
+/* Step 3: Menu Accordions (Clean Design for Desktop & Mobile) */
+.menu-accordions-unified {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 36px;
+  width: 100%;
+}
+
+.unified-accordion-card {
+  border: 1.5px solid #e2e8f0;
+  border-radius: 14px;
+  background: #ffffff;
+  overflow: hidden;
+  transition: all 0.15s ease;
+}
+
+.unified-accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: #f8fafc;
+  cursor: pointer;
+  user-select: none;
+}
+
+.unified-accordion-card.expanded .unified-accordion-header {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.unified-accordion-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.unified-accordion-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.unified-accordion-badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+
+.unified-accordion-icon {
+  color: #64748b;
+}
+
+.unified-accordion-content {
+  padding: 14px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.unified-items-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px 16px;
+}
+
+.unified-item-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.unified-item-row:hover {
+  background: #f8fafc;
+}
+
+.unified-item-row.select-all-row {
+  border-bottom: 1px dashed #e2e8f0;
+  padding-bottom: 12px;
+  margin-bottom: 8px;
+  border-radius: 0;
+}
+
+.unified-item-checkbox {
+  width: 19px;
+  height: 19px;
+  border-radius: 4px;
+  border: 1.5px solid #cbd5e1;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.12s ease;
+}
+
+.unified-item-checkbox.checked {
+  background-color: #ff4e27;
+  border-color: #ff4e27;
+}
+
+.unified-item-label {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: #1e293b;
+}
+
+.unified-item-label.select-all-label {
+  font-weight: 700;
+  color: #0f172a;
 }
 
 .menu-checkbox-item.checked .custom-checkbox-box {
@@ -784,11 +759,7 @@
     margin-bottom: 24px;
   }
 
-  /* Outlet Step 1 Mobile Layout (Matches Image 2) */
-  .outlet-desktop-only {
-    display: none !important;
-  }
-
+  /* Step 1 Outlet Cards on Mobile */
   .outlets-grid {
     grid-template-columns: 1fr;
     gap: 12px;
@@ -799,10 +770,8 @@
     padding: 14px 16px;
     border-radius: 14px;
     border: 1.5px solid #e2e8f0;
-    background: #ffffff;
     box-shadow: none;
     transform: none !important;
-    min-height: auto;
   }
 
   .outlet-selection-card:hover {
@@ -815,242 +784,84 @@
     box-shadow: 0 2px 8px rgba(255, 78, 39, 0.08);
   }
 
-  .outlet-mobile-content {
-    display: flex !important;
-    align-items: center;
-    width: 100%;
-    gap: 14px;
-  }
-
-  .outlet-mobile-icon {
+  .outlet-card-icon-col {
     width: 36px;
     height: 36px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #1e293b;
-    flex-shrink: 0;
   }
 
-  .outlet-mobile-info {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-width: 0;
-  }
-
-  .outlet-mobile-name {
+  .outlet-card-title {
     font-size: 15px;
-    font-weight: 700;
-    color: #0f172a;
-    line-height: 1.25;
   }
 
-  .outlet-mobile-desc {
+  .outlet-card-desc {
     font-size: 12.5px;
-    font-weight: 400;
-    color: #64748b;
-    line-height: 1.35;
-    margin-top: 3px;
+    margin-top: 2px;
   }
 
-  .outlet-mobile-radio {
+  .outlet-card-radio {
     width: 20px;
     height: 20px;
-    border-radius: 50%;
-    border: 2px solid #cbd5e1;
-    background: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.15s ease;
   }
 
-  .outlet-mobile-radio.selected {
-    border-color: #ff4e27;
-  }
-
-  .outlet-mobile-radio-inner {
+  .outlet-card-radio-inner {
     width: 10px;
     height: 10px;
-    border-radius: 50%;
-    background-color: #ff4e27;
   }
 
-  /* Desktop-only elements hidden on mobile */
-  .outlet-desktop-only,
-  .cuisine-desktop-only,
-  .menu-desktop-only {
-    display: none !important;
-  }
-
-  /* Show mobile elements */
-  .cuisine-mobile-only,
-  .menu-mobile-only {
-    display: flex !important;
-  }
-
-  /* Step 2 Mobile List (Matches Image 2) */
-  .cuisine-mobile-list {
-    flex-direction: column;
+  /* Step 2 Cuisines on Mobile */
+  .cuisines-grid-unified {
+    grid-template-columns: 1fr;
     gap: 10px;
     margin-bottom: 28px;
-    width: 100%;
   }
 
-  .cuisine-mobile-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 15px 16px;
-    border-radius: 12px;
-    border: 1.5px solid #e2e8f0;
-    background: #ffffff;
-    cursor: pointer;
-    transition: all 0.15s ease;
-  }
-
-  .cuisine-mobile-item.selected {
-    border-color: #ff4e27;
-    background-color: #fff9f6;
-    box-shadow: 0 2px 8px rgba(255, 78, 39, 0.08);
-  }
-
-  .cuisine-mobile-left {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .cuisine-mobile-checkbox {
-    width: 20px;
-    height: 20px;
-    border-radius: 4px;
-    border: 2px solid #cbd5e1;
-    background: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.15s ease;
-  }
-
-  .cuisine-mobile-checkbox.checked {
-    background-color: #ff4e27;
-    border-color: #ff4e27;
-  }
-
-  .cuisine-mobile-name {
-    font-size: 15px;
-    font-weight: 600;
-    color: #111827;
-  }
-
-  .cuisine-mobile-chevron {
-    color: #94a3b8;
-    transition: color 0.15s ease;
-  }
-
-  .cuisine-mobile-chevron.selected {
-    color: #ff4e27;
-  }
-
-  /* Step 3 Mobile Accordions (Matches Image 3) */
-  .menu-mobile-accordions {
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 28px;
-    width: 100%;
-  }
-
-  .mobile-accordion-card {
-    border: 1.5px solid #e2e8f0;
-    border-radius: 12px;
-    background: #ffffff;
-    overflow: hidden;
-    transition: all 0.15s ease;
-  }
-
-  .mobile-accordion-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  .cuisine-unified-item {
     padding: 14px 16px;
-    background: #f8fafc;
-    cursor: pointer;
-    user-select: none;
+    border-radius: 12px;
   }
 
-  .mobile-accordion-card.expanded .mobile-accordion-header {
-    border-bottom: 1px solid #f1f5f9;
-  }
-
-  .mobile-accordion-title {
+  .cuisine-unified-name {
     font-size: 15px;
-    font-weight: 700;
-    color: #0f172a;
   }
 
-  .mobile-accordion-icon {
-    color: #64748b;
+  /* Step 3 Menu Accordions on Mobile */
+  .menu-accordions-unified {
+    gap: 10px;
+    margin-bottom: 28px;
   }
 
-  .mobile-accordion-content {
-    padding: 6px 12px 10px;
-    display: flex;
-    flex-direction: column;
+  .unified-accordion-card {
+    border-radius: 12px;
+  }
+
+  .unified-accordion-header {
+    padding: 14px 16px;
+  }
+
+  .unified-accordion-title {
+    font-size: 15px;
+  }
+
+  .unified-accordion-badge {
+    display: none;
+  }
+
+  .unified-accordion-content {
+    padding: 6px 12px 12px;
+    gap: 4px;
+  }
+
+  .unified-items-grid {
+    grid-template-columns: 1fr;
     gap: 2px;
   }
 
-  .mobile-item-row {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 10px 8px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.12s ease;
+  .unified-item-row {
+    padding: 9px 8px;
   }
 
-  .mobile-item-row:hover {
-    background: #f8fafc;
-  }
-
-  .mobile-item-row.select-all-row {
-    border-bottom: 1px dashed #e2e8f0;
-    padding-bottom: 10px;
-    margin-bottom: 4px;
-    border-radius: 0;
-  }
-
-  .mobile-item-checkbox {
-    width: 19px;
-    height: 19px;
-    border-radius: 4px;
-    border: 1.5px solid #cbd5e1;
-    background: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: all 0.12s ease;
-  }
-
-  .mobile-item-checkbox.checked {
-    background-color: #ff4e27;
-    border-color: #ff4e27;
-  }
-
-  .mobile-item-label {
+  .unified-item-label {
     font-size: 14px;
-    font-weight: 500;
-    color: #1e293b;
-  }
-
-  .mobile-item-label.select-all-label {
-    font-weight: 600;
-    color: #0f172a;
   }
 
   /* Actions Bar on Mobile */
