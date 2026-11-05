@@ -236,7 +236,6 @@ export const MultiStepCalculator = ({ step = 1, onStepChange, onBackToHome, onCa
         {/* STEP 1: Outlet Type */}
         {currentStep === 1 && (<div>
             <h2 className="question-title">What kind of outlet do you operate?</h2>
-            <p className="question-subtitle">Select the option that best describes your business.</p>
 
             <div className="outlets-grid">
               {OUTLET_TYPES.map((ot) => {
@@ -266,7 +265,6 @@ export const MultiStepCalculator = ({ step = 1, onStepChange, onBackToHome, onCa
         {/* STEP 2: Cuisines */}
         {currentStep === 2 && (<div>
             <h2 className="question-title">What cuisines do you serve?</h2>
-            <p className="question-subtitle">Select all that apply.</p>
 
             <div className="cuisines-grid-unified">
               {CUISINES.map((c) => {
@@ -293,7 +291,6 @@ export const MultiStepCalculator = ({ step = 1, onStepChange, onBackToHome, onCa
         {/* STEP 3: Menu Items */}
         {currentStep === 3 && (<div>
             <h2 className="question-title">Select the items you currently sell</h2>
-            <p className="question-subtitle">Choose from the items based on the cuisines selected.</p>
 
             <div className="menu-accordions-unified">
               {selectedCuisines.map((cId) => {
@@ -369,9 +366,6 @@ export const MultiStepCalculator = ({ step = 1, onStepChange, onBackToHome, onCa
         {currentStep === 4 && (
           <div className="step-economics-container">
             <h2 className="question-title">Tell us about your kitchen&apos;s business numbers</h2>
-            <p className="question-subtitle">
-              Set your daily footfall, average order value, and current margin to estimate your profits.
-            </p>
 
             <div className="combined-metrics-grid">
               {/* Metric 1: Footfall */}
@@ -531,9 +525,6 @@ export const MultiStepCalculator = ({ step = 1, onStepChange, onBackToHome, onCa
             <div className="step-lead-header">
               <span className="step-lead-badge">Final Step • Almost Ready</span>
               <h2 className="question-title">Enter Details to Calculate Your Profits</h2>
-              <p className="question-subtitle">
-                Please enter your restaurant and contact details below. We will calculate your exact savings, margin improvements, and tailored sourcing plan.
-              </p>
             </div>
 
             <div className="step-lead-form">
